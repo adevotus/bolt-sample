@@ -80,12 +80,34 @@ class RegisterController extends Controller
         // Insert the user_id into the user_business table
         UserBusiness::create([
             'user_id' => $user->id,
-            'business_id' => null
+            'business_id' => null,
+            'business_name'=>null,
+            'phoneNumber'=>null,
+            'businessShortCode'=>null,
+            'tinNumber'=>null,
+            'contactPerson'=>null,
+            'createdDate'=>null,
         ]);
 
         session()->flash('registration_success', 'Thank you for registering, ' . $user->name . '! You\'re almost there. Please complete your registration by adding your business.');
 
-
         return $user;
     }
+
+    public function updateProfile(Request $request){
+
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|max:255',
+        ]);
+
+        $user = auth()->user(); // Assuming the user is authenticated
+
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+        $user->save();
+
+        return back()->with('success', 'Profile updated successfully.');
+    }
+
 }

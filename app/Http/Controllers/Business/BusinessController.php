@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use GuzzleHttp\Client;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
 class BusinessController extends Controller{
@@ -99,7 +100,15 @@ class BusinessController extends Controller{
 
                     // Update the user_business table with the business_id
                     UserBusiness::where('user_id', Auth::id())->update([
-                        'business_id' => $responseData['id']
+
+                        'business_id' => $responseData['id'],
+                        'business_name'=>$responseData['name'],
+                        'phoneNumber'=> $responseData['phoneNumber'],
+                        'businessShortCode'=>$responseData['businessShortCode'],
+                        'tinNumber'=>$responseData['tinNumber'],
+                        'contactPerson'=>$responseData['contactPerson'],
+                        'createdDate'=>$responseData['createdDate'],
+
                     ]);
                 }
 
@@ -159,10 +168,16 @@ class BusinessController extends Controller{
 
     public function businessOwner()
     {
-        $getBusinessOwners = User::where('role', 'client')->get();
-
-        return view('admin.pages.staff.business-owner', ['owners' => $getBusinessOwners])
-            ->with('owners_json', $getBusinessOwners->toJson());
+        $getBusinessOwners = DB::select("
+        SELECT u.name, u.email, ub.business_name, ub.phoneNumber, ub.businessShortCode, ub.tinNumber, ub.contactPerson
+        FROM users AS u
+        JOIN aljsw.user_business AS ub ON u.id = ub.user_id
+        WHERE u.role = 'client'
+    ");
+        $businessOwnersCollection = collect($getBusinessOwners);
+      //  dd($businessOwnersCollection);
+        return view('admin.pages.staff.business-owner', ['owners' => $businessOwnersCollection])
+            ->with('owners_json', $businessOwnersCollection->toJson());
     }
 
 }

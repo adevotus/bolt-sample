@@ -10,5 +10,5 @@ class UserBusiness extends Model
     use HasFactory;
     protected $table = 'user_business';
 
-    protected $fillable = ['user_id', 'business_id'];
+    protected $fillable = ['user_id', 'business_id','business_name','phoneNumber','businessShortCode','tinNumber','contactPerson','createdDate'];
 }

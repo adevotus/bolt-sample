@@ -53,7 +53,9 @@ Route::middleware(['auth', 'role:client'])->group(function () {
 
     Route::get('/client-profile',[StaffController::class,'index'])->name('profile-client');
 
+    Route::post('/client-profile/update', [StaffController::class, 'updateProfile'])->name('profile-update');
 
+    Route::post('/client-profile/update-password', [StaffController::class, 'updatePassword'])->name('profile_password-update');
 
 
 });

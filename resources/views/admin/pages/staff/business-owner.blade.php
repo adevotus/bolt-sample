@@ -32,7 +32,10 @@
                                                 {{--       <th>Date</th>--}}
                                                 <th>Email</th>
                                                 <th>Business Name</th>
-
+                                                 <th>Phone Number</th>
+                                                <th>Business Code </th>
+                                                <th>Tin Number</th>
+                                                <th>Contact Person</th>
                                                 <th>Actions</th>
                                             </tr>
                                             </thead>
@@ -41,7 +44,12 @@
                                                 <tr>
                                                     <td>{{ $owner->name }}</td>
                                                     <td>{{ $owner->email }}</td>
-                                                    <td>{{ $owner->business->name ?? 'N/A' }}</td> <!-- Assuming the 'User' model has a 'business' relationship -->
+                                                    <td>{{ $owner->business_name }}</td>
+                                                    <td>{{$owner->phoneNumber}}</td>
+                                                    <td>{{$owner->businessShortCode}}</td>
+                                                    <td>{{$owner->tinNumber}}</td>
+                                                    <td>{{$owner->contactPerson}}</td>
+                                                    <!-- Assuming the 'User' model has a 'business' relationship -->
                                                     <td>
                                                         <!-- Add action buttons here, like view, edit, delete -->
                                                         <a href="#" class="btn btn-sm btn-primary">View</a>
