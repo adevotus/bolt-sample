@@ -119,13 +119,6 @@
                                     <textarea class="form-control" id="message-text" name="description" required></textarea>
                                 </div>
 
-                                <div class="form-group">
-                                    <label for="inputState">State</label>
-                                    <select id="inputState" class="form-control">
-                                        <option selected>Choose...</option>
-                                        <option>...</option>
-                                    </select>
-                                </div>
                                 <div class ="row">
                                     <div class="col-md-4"></div>
                                     <div class="col-md-4 d-grid gap-2">
@@ -190,9 +183,6 @@
                                     </div>
 
                                 </div>
-
-
-
 
                             </div>
                         </div>
